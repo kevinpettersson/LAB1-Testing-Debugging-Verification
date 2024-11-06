@@ -1,0 +1,9 @@
+Submit your test suite showing that your DatesImprove.java actually works properly.
+We want you to showcase the fixes you've implemented in you test suite, so think about corner cases.
+The test suite should be a text file called DatesTestSuite.txt and contain rows of four integers,
+for example:
+
+1 2 3 4
+1 2 3 5
+...
+
