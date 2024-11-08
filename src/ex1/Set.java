@@ -17,9 +17,7 @@ public class Set {
     }
     return ia;
   }
-/*
-a = 0,
- */
+
   public void insert(int x) {
     for (int i = 0; i < a.size(); i++) {
       if (a.get(i) > x) {
