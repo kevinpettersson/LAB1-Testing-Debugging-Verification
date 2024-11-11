@@ -20,16 +20,20 @@ public class Set {
 
   public void insert(int x) {
     for (int i = 0; i < a.size(); i++) {
-      if (a.get(i) > x) {
-        a.add(i, x);
-        break;
+      if(!a.contains(x)){
+        if (a.get(i) > x) {
+          a.add(i, x);
+          break;
+      }
       } else {
         if (a.get(i) == x) {
           break;
         }
       }
     }
-    a.add(x);
+    if (!a.contains(x)) {
+      a.add(x);
+    }
   }
 
   public boolean member(int x) {
@@ -46,16 +50,28 @@ public class Set {
   }
 
   public void intersect(Set s) {
+
+    for(int i = 0; i < a.size();) {
+      if (s.a.contains(a.get(i))){
+        i++;
+      } else{
+        a.remove(a.get(i));
+      }
+    }
+  }
+
+  public void intersecct(Set s) {
+
     for(int i = 0, j = 0 ; i < a.size() && j < s.a.size();) {
       if (a.get(i).equals(s.a.get(j))){
         i++;
         j++;
       } else {
-        if (a.get(i) < s.a.get(j)) {
+        if (!(a.get(i).equals(s.a.get(j)))){
           a.remove(i);
-          i++;
+           //DENNA
         } else {
-          j++;
+          j++; //
         }
       }
     }

@@ -1,0 +1,3 @@
+bugg i insert fixat
+
+intersect vi inkrementerar på rad 60 vilket gör att vi hamnar på fel index
