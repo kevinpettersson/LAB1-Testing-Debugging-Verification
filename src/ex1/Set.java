@@ -50,29 +50,11 @@ public class Set {
   }
 
   public void intersect(Set s) {
-
     for(int i = 0; i < a.size();) {
       if (s.a.contains(a.get(i))){
         i++;
       } else{
         a.remove(a.get(i));
-      }
-    }
-  }
-
-  public void intersecct(Set s) {
-
-    for(int i = 0, j = 0 ; i < a.size() && j < s.a.size();) {
-      if (a.get(i).equals(s.a.get(j))){
-        i++;
-        j++;
-      } else {
-        if (!(a.get(i).equals(s.a.get(j)))){
-          a.remove(i);
-           //DENNA
-        } else {
-          j++; //
-        }
       }
     }
   }
