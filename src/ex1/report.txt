@@ -74,6 +74,12 @@ intersectTestSomeElementsCommon():
 
 ---- DISTINCT-CLOSED --------------------------------------------------------------------------------------------------
 
+The distinctClosed method got a bug, as we iterate through the set we sometimes check the same element as the indices
+(i == j) are the same, to fix this we let the inner loop instead start at j = i + 1 and remove the now unnecessary check
+(vi == vj) in the if-clause. This resolves the issue as we will only check distinct elements, but we noticed another bug,
+now if the set would have (size <= 1) this would throw an out-of-bounds exception, so we implemented a check in the
+beginning of the method that checks: if(a.size <= 1) return true;
+
 
 
 

@@ -226,7 +226,9 @@ class SetTests {
      */
 
     @Test
-    void distinctClosed() {
+    void distinctClosedTestEmptySet() {
+        var a = new Set();
 
+        assertTrue(a.distinctClosed((x, y) -> x + y));
     }
 }
