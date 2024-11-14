@@ -80,6 +80,16 @@ The distinctClosed method got a bug, as we iterate through the set we sometimes 
 now if the set would have (size <= 1) this would throw an out-of-bounds exception, so we implemented a check in the
 beginning of the method that checks: if(a.size <= 1) return true;
 
+distinctClosedTestEmptySet():
+
+distincClosedOneElement():
+
+distinctClosedAddition():
+
+distinctClosedSubtraction():
+
+distinctClosedMultiplication():
+
 
 
 

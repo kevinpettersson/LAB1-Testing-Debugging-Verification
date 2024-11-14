@@ -229,6 +229,51 @@ class SetTests {
     void distinctClosedTestEmptySet() {
         var a = new Set();
 
-        assertTrue(a.distinctClosed((x, y) -> x + y));
+        assertTrue(a.distinctClosed((x, y) -> x+y));
+        assertTrue(a.distinctClosed((x, y) -> x-y));
     }
+
+    @Test
+    void distincClosedOneElement(){
+        var a = new Set();
+
+        a.insert(1);
+        assertTrue(a.distinctClosed((x, y) -> x+y));
+        assertTrue(a.distinctClosed((x, y) -> x-y));
+    }
+
+    @Test
+    void distinctClosedAddition(){
+        var a = new Set();
+
+        a.insert(1);
+        a.insert(2);
+        a.insert(3);
+
+        assertFalse(a.distinctClosed((x, y) -> x+y));
+    }
+
+    @Test
+    void distinctClosedSubtraction(){
+        var a = new Set();
+
+        a.insert(1);
+        a.insert(2);
+        a.insert(3);
+
+        assertFalse(a.distinctClosed((x, y) -> x-y));
+    }
+
+    @Test
+    void distinctClosedMultiplication(){
+        var a = new Set();
+
+        a.insert(0);
+        a.insert(1);
+        a.insert(2);
+
+        assertTrue(a.distinctClosed((x, y) -> x*y));
+    }
+
+
 }
