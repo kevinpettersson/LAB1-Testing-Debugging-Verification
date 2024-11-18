@@ -81,28 +81,25 @@ now if the set would have (size <= 1) this would throw an out-of-bounds exceptio
 beginning of the method that checks: if(a.size <= 1) return true;
 
 distinctClosedTestEmptySet():
+    Checks that the method correctly handles empty sets.
+    Ensures that an empty set is considered closed as there are no pairs to evaluate.
 
 distincClosedOneElement():
+    Checks wheter the method handles single element sets.
+    ensures that the set is considered closed under any operation since there are no distinct pairs.
 
 distinctClosedAddition():
+    Checks that a set is not considered closed under addition.
+    Ensures that if applying the operator result in an element outside the set.
 
 distinctClosedSubtraction():
+    Checks thet a set is not considered closed under subtraction.
+    ensures that applying the operator results in an element outside the set.
 
 distinctClosedMultiplication():
+    Checks that a set is not considered closed under multiplication
+    ensures if all pairs operation are within the set.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-intersect vi inkrementerar på rad 60 vilket gör att vi hamnar på fel index
+distinctClosedNegativeNumbers()
+    Checks that the method also handles negative numbers
+    ensures if that the methods return true when result of all operations are within the set

@@ -1,4 +1,3 @@
-package ex1;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -235,6 +234,7 @@ class SetTests {
 
     @Test
     void distincClosedOneElement(){
+        //expected output: true, since it's only one element it will always result in the element.
         var a = new Set();
 
         a.insert(1);
@@ -244,6 +244,7 @@ class SetTests {
 
     @Test
     void distinctClosedAddition(){
+        // expected output: false, since the result of adding some pairs does not exist in the set.
         var a = new Set();
 
         a.insert(1);
@@ -255,6 +256,7 @@ class SetTests {
 
     @Test
     void distinctClosedSubtraction(){
+        // expected output: false, since the result of subtracting some pair does not exist in the set.
         var a = new Set();
 
         a.insert(1);
@@ -266,6 +268,7 @@ class SetTests {
 
     @Test
     void distinctClosedMultiplication(){
+        // expexted output: true, since the result of multiplying each pair exists in the set.
         var a = new Set();
 
         a.insert(0);
@@ -273,6 +276,17 @@ class SetTests {
         a.insert(2);
 
         assertTrue(a.distinctClosed((x, y) -> x*y));
+    }
+
+    @Test
+    void distinctClosedNegativeNumbers() {
+        // expected output: true, since the result of applying addition on each pair exists in the set.
+        var a = new Set();
+        a.insert(-2);
+        a.insert(0);
+        a.insert(2);
+
+        assertTrue(a.distinctClosed((x, y) -> x + y));
     }
 
 

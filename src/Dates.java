@@ -1,10 +1,3 @@
-package ex3;/*
-  Origin from http://pages.cs.wisc.edu/~vernon/cs367/tutorials/jdb.tutorial.html
-  Modified by Jeff C.
-*/
-
-import java.io.*;
-
 class Dates {
 
   /* Precondition: month is between 1 and 12, inclusive */

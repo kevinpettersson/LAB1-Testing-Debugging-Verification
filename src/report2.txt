@@ -1,0 +1,68 @@
+public void setRequiredNumber(int nemployee, int starttime, int endtime) { ... }
+
+requires:
+  0 <= nemployee and  0 <= starttime and  0 <= endtime
+
+ensures:
+  if starttime > endtime then
+    the schedule is unchanged
+  otherwise
+      for (each Hour between starttime and endtime (inclusive))
+          if (the length of workingEmployees is greater than nemployee)
+          then
+             requiredNumber is set to nemployee and workingEmployees
+             keeps a number of employees equal to nemployee, discarding
+             the rest
+          otherwise
+             requiredNumber is set to nemployee and workingEmployees is unchanged
+      and the rest of the schedule is unchanged
+
+
+Input space/Partition: x != 0 (or: "x" in { MIN_INT, ..., -1, 1, ..., MAX_INT } )
+
+  Block #1: x > 0 (or: "x" in { 1, ..., MAX_INT } )
+    test_m_part1: input: "x = 155", expected: "m(x) = "High""
+  Block #2: x < 0 (or: "x" in { MIN_INT, ..., -1 } )
+    test_m_part2: input: "x = -18", expected: "m(x) = "Low""
+
+  Border cases:
+    test_m_border1: input: "x = MIN_INT", expected: "m(x) = "Low""
+    test_m_border2: input: "x = -1",      expected: "m(x) = "Low""
+    test_m_border3: input: "x = 1",       expected: "m(x) = "High""
+    test_m_border4: input: "x = MAX_INT", expected: "m(x) = "High""
+
+  Found bugs:
+    setRequiredNumberTestNemployeeBiggerThanWorkingEmployees, (requiredNumber is set to nemployee and workingEmployees
+    keeps a number of employees equal to nemployee, discarding the rest)
+
+-------
+setRequiredNumberTestInputsAllZero
+    Input space/Partition:
+        0 = nemployee, 0 = starttime, 0 = endtime
+    Border cases:
+        input: "Kevin",0,1 , expected: "0",0,0
+
+setRequiredNumberTestStartTimeBiggerThanEndTime
+    Input space/Partition:
+         2 = nemployee, 3 = starttime, 2 = endtime
+    Border cases:
+            input: "Kevin",0,1 , expected: schedule unchanged
+
+setRequiredNumberTestNemployeeBiggerThanWorkingEmployees
+    Input space/Partition:
+         3 = nemployee, 0 = starttime, 3 = endtime
+-------------------------------------------------------------------------------------------------------
+
+public int nextIncomplete(int currenttime) { ... }
+
+requires:
+  currenttime >= 0 and currenttime < size
+ensures:
+  if there is an hour in the interval currenttime to size - 1 such that
+     the length of workingEmployees is less that requiredNumber
+  then
+    returns the time of the hour closest to currenttime such that
+    the length of workingEmployees is less that requiredNumber
+  otherwise
+    returns -1
+  and in either case the schedule is unchanged
