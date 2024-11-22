@@ -64,7 +64,7 @@ ensures:
               expected: requiredNumber = 0, workingEmplyees = 0 (trims the list of emplyees as it should)
 
   Found bugs:
-    setRequiredNumberTest_NemployeeBiggerThanWorkingEmployees():
+    setRequiredNumberTest_NemployeeSmallerThanWorkingEmployees():
     When setting requiredNumber = 3 then adding 3 employees followed by setting requiredNumber = 2
     doesn't trim the list of workers as it should.
 

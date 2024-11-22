@@ -14,19 +14,6 @@ public class NextInCompleteTests {
 
         assertEquals(-1, ws.nextIncomplete(0));
     }
-/*
-    @Test
-    public void nextIncompleteTest_CurrentTimeIncomplete() {
-        // Block 2
-        var ws = new WorkSchedule(4);
-
-        ws.setRequiredNumber(2,0,3);
-        ws.addWorkingPeriod("alice", 0,1);
-        ws.addWorkingPeriod("kevin", 0,1);
-        // bugg! borde returnera två
-        assertEquals(2, ws.nextIncomplete(2));
-    }
- */
 
     @Test
     public void nextIncompleteTest_IncompleteCurrentTime() {
