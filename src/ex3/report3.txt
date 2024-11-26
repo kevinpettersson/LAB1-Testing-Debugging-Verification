@@ -1,0 +1,93 @@
+3.1
+Bugs in Dates.java:
+
+    Input: 13 3 6 5
+    Output: -The difference in days between 13/3 and 6/5 is:
+            -397
+    Expected output: Exception should be thrown
+    Month 13 does not exist. An exception should be thrown, but instead, we get a negative result.
+
+    Input: 12 31 1 1
+    Output: -The difference in days between 12/31 and 1/1 is:
+            -398
+    Expected output: 1
+    The program does not treat the latter date as occuring the following year,
+    instead it returns a negative value that also exceeds the total amount of days in a year.
+
+    Input: 1 22 1 24
+    Output: The difference in days between 1/22 and 1/24 is:
+            -29
+    Expected output: 2
+    The program doesn't correctly handle difference in days when the month is the same.
+
+3.2
+Local variables:
+   int someDayInYear
+   int laterDayInYear
+   int someMonth
+   int SomeDay
+   int laterMonth
+   int aMonth
+
+3.3
+Methods in Dates:
+   daysInMonth(int).
+   Breakpoint hit: "thread=main", Dates.daysInMonth(), line=13 bci=0
+   13        int laterMonth, laterDay;
+
+3.4
+Bugs in Dates:
+
+   aMonth = 0, line 27 and line 31. In the for-loop aMonth starts at 0 which will add an extra 31 days
+   to someDayInYear and laterDayInYear once aMonth gets passed in the daysInMonth method in the first iteration.
+
+   On line 40 dayBetween can become a negative value if someDayInYear > laterDayInYear
+   The same on line 41 with someDay > laterday
+
+   On line 17-20 when assigning the variables: someMonth, someDay, laterMonth, laterDay there are no checks that
+   satifsy the preCondition of daysInMonth to check if the date is valid and if not valid throw an exception.
+
+   On line 13 in the method daysInMonth method all months aren't considered, for example month 2 should return 28.
+   daysInMonth, fel då månad 7 ej är 30 dagar och visade inte alla månader samt glömde februari med 28 dagar
+
+3.5
+DatesImprove:
+    In the daysInMonth method we added all the months and now return correct days for each month.
+
+    We also created a new method isValidDate where we check that the input months and days are valid dates,
+    which returns true or false.
+    In the main body we pass in the parsed arguments from the String-array and throw and exception if some date is
+    not valid.
+
+    in the for-loops we start from aMonth = 1 instead of aMonth = 0 which isn't a valid month.
+
+    We calculate dayBetween by adding laterDayInYear with laterDay and then substraction the result with
+    someDayInYear and someDay.
+    If then the latter date appears before the first date we add 365 days to daysBetween.
+
+3.6
+Test Suite:
+1 2 3 4     # first date before latter date
+result: 61 days
+1 22 1 22   # same date
+result: 0 days
+12 31 1 1   # latter date before first date
+result: 1 day
+11 15 2 10  # larger difference later date before first date
+result: 87
+1 1 12 31   # whole year difference
+result: 364
+6 30 7 1    # last of the month, first of the next month
+result: 1
+13 5 6 7    # invalid month
+result: exception: invalid date
+6 40 6 7    # invalid day
+result: exception: invalid date
+
+
+
+
+
+
+
+

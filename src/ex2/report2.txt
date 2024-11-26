@@ -89,27 +89,77 @@ Input space:
     0 <= currenttime < size
 
 Partition:
-    currenttime = 0
-    0 < currenttime < size
-    currenttime = size-1
-    workingEmployees >= requiredEmployees
-    workingEmployees < requiredEmployees
 
-Block #1:
-    nextIncompleteTest_CurrentTimeEqualToZero():
+    currenttime == 0 && workingEmployees >= requiredEmployees.
+    currenttime == 0 && requiredEmployees == 0.
+    0 < currenttime < size && workingEmployees < requiredEmployees.
+    0 < currenttime < size && workingEmployees >= requiredEmployees.
 
-Block #2:
-    nextIncompleteTest_CurrentTimeWithinValidRange():
+    currenttime > size
+    currenttime < 0
 
-Block #3:
-    nextIncompleteTest_CurrentTimeEqualToLastHour():
+Block #1: currenttime == 0 && workingEmployees >= requiredEmployees
+    nextIncompleteAllHoursFilledAndCurrentTimeEqualsToZero():
+    input: 1. size = 7
+           2. setRequiredNumber (nemeployee = 2, starttime = 0, endtime = 5)
+           3. addWorkingPeriod("kevin", 0, 5);
+           3. addWorkingPeriod("alice", 0, 5);
+           4. currenttime = 0.
+    expected: -1, since all hours are filled.
 
-Block #4:
-    nextIncompleteTest_AllHoursAreFilled():
+Block #2: currenttime == 0 && requiredEmployees == 0.
+    nextIncompleteNoRequiredWorkers():
+    input: 1. size = 7
+           2. currenttime = 0.
+    expected: -1, since we never set requiredWorkeers.
 
-Block #5:
-    nextIncompleteTest_AllHoursAreNotFilled():
+Block #3: 0 < currenttime < size && workingEmployees < requiredEmployees.
+    nextIncomplete_NotAllHoursFilled():
+        input: 1. size = 7
+               2. setRequiredNumber (nemeployee = 2, starttime = 0, endtime = 5)
+               3. addWorkingPeriod("kevin", 0, 2);
+               3. addWorkingPeriod("alice", 0, 5);
+               4. currenttime = 0.
+        expected: 3, since only 1 person works after hour 2. (Bug here check bug report)
+
+    nextIncompleteNoAddedWorkers():
+
+
+Block #4: 0 < currenttime < size && workingEmployees > requiredEmployees.
+    nextIncompleteAllHoursFilledAndCurrentTimeWithinValidRange():
+        input: 1. size = 7
+               2. setRequiredNumber (nemeployee = 2, starttime = 0, endtime = 5)
+               3. addWorkingPeriod("kevin", 0, 5);
+               3. addWorkingPeriod("alice", 0, 5);
+               4. currenttime = 2.
+        expected: -1, since all hours are filled.
 
 Border cases:
+currenttime > size
+    nextIncompleteTest_CurrentTimeBiggerThanTotalHours():
+    input: 1. size = 7
+           2. setRequiredNumber (nemeployee = 2, starttime = 0, endtime = 5)
+           3. addWorkingPeriod("kevin", 0, 5);
+           3. addWorkingPeriod("alice", 0, 5);
+           4. currenttime = 11.
+    expected: -1, since hour 11 isn't part of the schedule.
+
+currenttime < 0
+    nextIncompleteTest_CurrentTimeLessThanZero():
+    input: 1. size = 7
+           2. setRequiredNumber (nemeployee = 2, starttime = 0, endtime = 5)
+           3. addWorkingPeriod("kevin", 0, 5);
+           3. addWorkingPeriod("alice", 0, 5);
+           4. currenttime = -1.
+    expected: -1, since schedule can't have negative hours.
 
 Found bugs:
+    nextIncompleteTest_CurrentTimeLessThanZero():
+        Should still return -1 since passing in -1 in nextIncomplete should not throw and arrayOutOfBounds
+        eception and crash the program.
+
+    nextIncomplete_NotAllHoursFilled()
+        Should return 3, which is the closest hour but returns last hour.
+
+    nextIncompleteNoAddedWorkers():
+        Should return the closest hour that is not complete which is 0 but returns last hour.
